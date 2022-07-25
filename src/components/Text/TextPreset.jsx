@@ -34,6 +34,6 @@ export const Presets = {
   },
   h4: {
     ...BASE_BOLD,
-    fontSize: 14,
+    fontSize: 18,
   },
 };
