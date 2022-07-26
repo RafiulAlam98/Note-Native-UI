@@ -12,13 +12,17 @@ import Text from '../components/Text/Text';
 import { colors } from '../Theme/Colors';
 import { spacing } from '../Theme/Spacing';
 import Button from '../components/Button/Button';
+import { useNavigation } from '@react-navigation/native';
+import Input from '../components/Input/Input';
+
 export default function SignIn() {
   const onChangeText = text => {
     console.log(text);
   };
+  const navigation = useNavigation();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <Image
           style={{ alignSelf: 'center' }}
@@ -29,21 +33,8 @@ export default function SignIn() {
         </Text>
         <View style={{ height: 30 }} />
         <View>
-          <TextInput
-            placeholder="Email Address"
-            autoCorrect={false}
-            placeholderTextColor={colors.black}
-            style={styles.textInput}
-            onChangeText={text => onChangeText(text)}
-          />
-          <TextInput
-            autoCorrect={false}
-            placeholder="Password"
-            placeholderTextColor={colors.black}
-            style={styles.textInput}
-            secureTextEntry
-            onChangeText={text => onChangeText(text)}
-          />
+          <Input placeholder="Email Address" />
+          <Input placeholder="Password" secureTextEntry />
           <View
             style={{
               flex: 1,
@@ -53,16 +44,20 @@ export default function SignIn() {
           >
             <Button
               customStyles={{ alignSelf: 'center', marginTop: 60 }}
-              title="Sign In"
+              title="Login"
             />
-            <Pressable>
+            <Pressable
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}
+            >
               <Text
                 preset="h4"
                 style={{ color: colors.black, marginTop: spacing[3] }}
               >
                 Don't have any account?{' '}
                 <Text preset="h4" style={{ color: colors.blue }}>
-                  Sign Up
+                  Signup
                 </Text>
               </Text>
             </Pressable>
@@ -74,16 +69,13 @@ export default function SignIn() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: spacing[3],
+  },
   notetxt: {
     color: colors.lightgreen,
     textAlign: 'center',
     textTransform: 'uppercase',
-  },
-  textInput: {
-    borderBottomColor: colors.darkgray,
-    borderBottomWidth: 1,
-    padding: spacing[2],
-    marginHorizontal: spacing[4],
-    marginBottom: spacing[4],
   },
 });

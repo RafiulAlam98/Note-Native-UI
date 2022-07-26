@@ -7,44 +7,44 @@ import {
   TextInput,
   Pressable,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Text from '../components/Text/Text';
 import { colors } from '../Theme/Colors';
 import { spacing } from '../Theme/Spacing';
 import Button from '../components/Button/Button';
+import { useNavigation } from '@react-navigation/native';
+import Input from '../components/Input/Input';
+import RadioInput from '../components/Input/RadioInput';
 
 export default function SignUp() {
+  const navigation = useNavigation();
+  const genderOptions = ['Male', 'Female'];
+  const [gender, setGender] = useState(null);
   const onChangeText = text => {
     console.log(text);
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Image
-          style={{ alignSelf: 'center' }}
-          source={require('../../assets/Images/empty-state.png')}
-        />
-        <Text preset="h4" style={styles.notetxt}>
-          Never forget your notes
-        </Text>
         <View style={{ height: 30 }} />
         <View>
-          <TextInput
-            placeholder="Email Address"
-            autoCorrect={false}
-            placeholderTextColor={colors.black}
-            style={styles.textInput}
-            onChangeText={text => onChangeText(text)}
-          />
-          <TextInput
-            autoCorrect={false}
-            placeholder="Password"
-            placeholderTextColor={colors.black}
-            style={styles.textInput}
-            secureTextEntry
-            onChangeText={text => onChangeText(text)}
-          />
+          <Input placeholder="Email Address" />
+          <Input placeholder="Password" secureTextEntry />
+          <Input placeholder="Full Name" />
+          <Input placeholder="Age" />
+
+          {genderOptions.map(option => {
+            const selected = gender === option;
+            return (
+              <RadioInput
+                selected={selected}
+                setGender={setGender}
+                option={option}
+              />
+            );
+          })}
+
           <View
             style={{
               flex: 1,
@@ -54,16 +54,20 @@ export default function SignUp() {
           >
             <Button
               customStyles={{ alignSelf: 'center', marginTop: 60 }}
-              title="Sign In"
+              title="Signup"
             />
-            <Pressable>
+            <Pressable
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            >
               <Text
                 preset="h4"
                 style={{ color: colors.black, marginTop: spacing[3] }}
               >
-                Don't have any account?{' '}
+                Already have an account?{' '}
                 <Text preset="h4" style={{ color: colors.blue }}>
-                  Sign Up
+                  Sign in
                 </Text>
               </Text>
             </Pressable>
@@ -75,6 +79,10 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: spacing[3],
+  },
   notetxt: {
     color: colors.lightgreen,
     textAlign: 'center',
