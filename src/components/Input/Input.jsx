@@ -1,16 +1,22 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import React from 'react';
-import { colors } from '../../Theme/Colors';
-import { spacing } from '../../Theme/Spacing';
+import React from "react";
+import { StyleSheet, TextInput } from "react-native";
+import { colors } from "../../Theme/Colors";
+import { spacing } from "../../Theme/Spacing";
 
-export default function Input({ placeholder, secureTextEntry }) {
+export default function Input({
+  placeholder,
+  secureTextEntry,
+  onChangeText,
+  autoCapitalize,
+}) {
   return (
     <TextInput
+      onChangeText={onChangeText}
       placeholder={placeholder}
       secureTextEntry={secureTextEntry}
-      autoCorrect={false}
       placeholderTextColor={colors.black}
       style={styles.textInput}
+      autoCapitalize={autoCapitalize}
     />
   );
 }
