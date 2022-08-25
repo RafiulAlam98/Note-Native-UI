@@ -3,13 +3,16 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../../Theme/Colors";
 import { spacing } from "../../Theme/Spacing";
 
-export default function RadioInput({ key, value, setValue }) {
+export default function RadioInput({ key, label, value, setValue }) {
+  const selected = value === label;
   return (
     <Pressable
       style={styles.radioContainer}
-      key={option}
+      key={key}
+      label={label}
+      value={value}
       onPress={() => {
-        setGender(option);
+        setValue(label);
       }}
     >
       <View
@@ -19,8 +22,9 @@ export default function RadioInput({ key, value, setValue }) {
           style={[styles.innerCircle, selected && styles.selectedInnerCircle]}
         />
       </View>
+
       <Text style={{ color: colors.black, marginLeft: spacing[2] }}>
-        {option}
+        {label}
       </Text>
     </Pressable>
   );
@@ -51,9 +55,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   selectedOuterCircle: {
-    borderColor: colors.orange,
+    borderColor: colors.red,
   },
   selectedInnerCircle: {
-    backgroundColor: colors.orange,
+    backgroundColor: colors.red,
   },
 });

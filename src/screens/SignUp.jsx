@@ -13,6 +13,7 @@ import {
 import { auth, db } from "../../App";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
+import RadioInput from "../components/Input/RadioInput";
 import Text from "../components/Text/Text";
 import { colors } from "../Theme/Colors";
 import { spacing } from "../Theme/Spacing";
@@ -77,32 +78,13 @@ export default function SignUp() {
           <Input placeholder="Age" onChangeText={(text) => setAge(text)} />
 
           {genderOptions.map((option, index) => {
-            const selected = gender === option;
             return (
-              <Pressable
-                style={styles.radioContainer}
+              <RadioInput
                 key={index}
-                onPress={() => {
-                  setGender(option);
-                }}
-              >
-                <View
-                  style={[
-                    styles.outerCircle,
-                    selected && styles.selectedOuterCircle,
-                  ]}
-                >
-                  <View
-                    style={[
-                      styles.innerCircle,
-                      selected && styles.selectedInnerCircle,
-                    ]}
-                  />
-                </View>
-                <Text style={{ color: colors.black, marginLeft: spacing[2] }}>
-                  {option}
-                </Text>
-              </Pressable>
+                label={option}
+                value={gender}
+                setValue={setGender}
+              />
             );
           })}
 
@@ -161,34 +143,5 @@ const styles = StyleSheet.create({
     padding: spacing[2],
     marginHorizontal: spacing[4],
     marginBottom: spacing[4],
-  },
-  radioContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: spacing[4],
-    marginVertical: 10,
-  },
-  outerCircle: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: colors.grey,
-    borderWidth: 1,
-  },
-  innerCircle: {
-    width: 15,
-    height: 15,
-    borderRadius: 7.5,
-    borderColor: colors.grey,
-    borderWidth: 1,
-  },
-  selectedOuterCircle: {
-    borderColor: colors.orange,
-  },
-  selectedInnerCircle: {
-    backgroundColor: colors.orange,
   },
 });
