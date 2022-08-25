@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   selectedOuterCircle: {
-    borderColor: colors.red,
+    borderColor: colors.lightRed,
   },
   selectedInnerCircle: {
-    backgroundColor: colors.red,
+    backgroundColor: colors.darkgray,
   },
 });

@@ -1,5 +1,8 @@
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { db } from "../../App";
+import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import RadioInput from "../components/Input/RadioInput";
 import Text from "../components/Text/Text";
@@ -7,11 +10,19 @@ import { colors } from "../Theme/Colors";
 import { spacing } from "../Theme/Spacing";
 
 const noteColorOptions = ["red", "green", "blue"];
-export default function Create() {
+export default function Create({ navigation, route, user }) {
   const [noteColor, setNoteColor] = useState("blue");
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const onPressCreate = async () => {
+    const docRef = await addDoc(collection(db, "notes"), {
+      title: title,
+      description: description,
+      color: noteColor,
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,6 +49,12 @@ export default function Create() {
             />
           );
         })}
+
+        <Button
+          customStyles={{ alignSelf: "center", marginTop: 60 }}
+          title="Submit"
+          onPress={onPressCreate}
+        />
       </ScrollView>
     </SafeAreaView>
   );
