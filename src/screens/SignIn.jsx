@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -9,6 +10,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { auth } from "../../App";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import Text from "../components/Text/Text";
@@ -26,6 +28,7 @@ export default function SignIn() {
     const result = await signInWithEmailAndPassword(auth, email, password);
     console.log(result);
     setLoading(false);
+    console.log("click");
   };
 
   return (

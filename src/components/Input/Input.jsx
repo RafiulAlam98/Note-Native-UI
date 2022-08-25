@@ -8,25 +8,26 @@ export default function Input({
   secureTextEntry,
   onChangeText,
   autoCapitalize,
+  multiline,
 }) {
   return (
     <TextInput
       onChangeText={onChangeText}
       placeholder={placeholder}
       secureTextEntry={secureTextEntry}
-      placeholderTextColor={colors.black}
+      placeholderTextColor={colors.grey}
       style={styles.textInput}
       autoCapitalize={autoCapitalize}
+      multiline={multiline}
     />
   );
 }
 
 const styles = StyleSheet.create({
   textInput: {
-    borderBottomColor: colors.darkgray,
-    borderBottomWidth: 1,
-    padding: spacing[2],
+    margin: spacing[3],
+    borderBottomColor: colors.grey,
+    borderBottomWidth: 0.5,
     marginHorizontal: spacing[4],
-    marginBottom: spacing[4],
   },
 });

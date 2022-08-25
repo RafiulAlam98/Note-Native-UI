@@ -17,9 +17,11 @@ import Text from "../components/Text/Text";
 import { colors } from "../Theme/Colors";
 import { spacing } from "../Theme/Spacing";
 
+const genderOptions = ["Male", "Female"];
+
 export default function SignUp() {
   const navigation = useNavigation();
-  const genderOptions = ["Male", "Female"];
+
   const [gender, setGender] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,27 +64,24 @@ export default function SignUp() {
             placeholder="Email "
             autoCapitalize={"none"}
           />
-
           <Input
             onChangeText={(text) => setPassword(text)}
             placeholder="Password"
             secureTextEntry
           />
-
           <Input
             placeholder="Full Name"
             onChangeText={(text) => setFullName(text)}
             autoCapitalize={"words"}
           />
-
           <Input placeholder="Age" onChangeText={(text) => setAge(text)} />
 
-          {genderOptions.map((option) => {
+          {genderOptions.map((option, index) => {
             const selected = gender === option;
             return (
               <Pressable
                 style={styles.radioContainer}
-                key={option}
+                key={index}
                 onPress={() => {
                   setGender(option);
                 }}

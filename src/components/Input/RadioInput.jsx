@@ -1,9 +1,9 @@
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import React from 'react';
-import { spacing } from '../../Theme/Spacing';
-import { colors } from '../../Theme/Colors';
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors } from "../../Theme/Colors";
+import { spacing } from "../../Theme/Spacing";
 
-export default function RadioInput({ option, setGender, selected }) {
+export default function RadioInput({ key, value, setValue }) {
   return (
     <Pressable
       style={styles.radioContainer}
@@ -29,8 +29,8 @@ export default function RadioInput({ option, setGender, selected }) {
 const styles = StyleSheet.create({
   radioContainer: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginLeft: spacing[4],
     marginVertical: 10,
   },
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderColor: colors.grey,
     borderWidth: 1,
   },

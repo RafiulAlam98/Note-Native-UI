@@ -2,13 +2,14 @@ import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import Create from "./src/screens/Create";
 import Edit from "./src/screens/Edit";
 import Home from "./src/screens/Home";
+
 import SignIn from "./src/screens/SignIn";
 import SignUp from "./src/screens/SignUp";
 import { colors } from "./src/Theme/Colors";
@@ -44,15 +45,15 @@ export default function App() {
     const authSubscription = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        setLoading(false);
       }
+      setLoading(false);
     });
     return authSubscription;
   }, []);
 
-  useEffect(() => {
-    signOut(auth);
-  }, []);
+  // useEffect(() => {
+  //   signOut(auth);
+  // }, []);
 
   if (loading) {
     return (
@@ -77,13 +78,15 @@ export default function App() {
       <Stack.Navigator>
         {user ? (
           <>
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="Edit" component={Edit} />
-            <Stack.Screen name="Create" component={Create} />
+            <Stack.Screen name="Home" options={{ headerShown: false }}>
+              {(props) => <Home {...props} user={user} />}
+            </Stack.Screen>
+            <Stack.Screen name="Create">
+              {(props) => <Create {...props} user={user} />}
+            </Stack.Screen>
+            <Stack.Screen name="Edit">
+              {(props) => <Edit {...props} user={user} />}
+            </Stack.Screen>
           </>
         ) : (
           <>
